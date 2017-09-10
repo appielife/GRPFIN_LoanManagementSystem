@@ -1,9 +1,10 @@
 <?php
+ include 'connection.php';
  include 'header.php';
-$servername="localhost";
-	$username="root";
-	$password="password";
-	$dbname="fincorp";
+// $servername="localhost";
+// 	$username="root";
+// 	$password="password";
+// 	$dbname="fincorp";
 	$name=$_POST['due_name'];
 	$date=$_POST['curr_date'];
 	$count=1;

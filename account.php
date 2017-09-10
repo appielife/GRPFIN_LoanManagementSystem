@@ -1,9 +1,11 @@
 <?php
  include 'header.php';
-$servername = "localhost";
-$username = "root";
-$password = "password";
-$dbname="fincorp";
+ include 'connection.php';
+
+// $servername = "localhost";
+// $username = "root";
+// $password = "password";
+// $dbname="fincorp";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password,$dbname);
@@ -20,7 +22,7 @@ $result1=$conn->query($sql1);
 
 echo"<html><body><center><table><tr><td>
 
-<form action='http://127.0.0.1/parwalfincorp/account_det.php' method='post'>
+<form action='account_det.php' method='post'>
 
   
    <br>Search For</td><td><select name='name'>";

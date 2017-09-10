@@ -1,10 +1,11 @@
 <?php
 $date='2017-04-01';
 include 'header.php';
-	$servername="localhost";
-	$username="root";
-	$password="password";
-	$dbname="fincorp";
+include 'connection.php';
+	// $servername="localhost";
+	// $username="root";
+	// $password="password";
+	// $dbname="fincorp";
 	$count=1;
 	$total=0;
 		$total1=0;

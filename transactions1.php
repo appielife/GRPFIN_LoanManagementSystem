@@ -1,8 +1,9 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "password";
-$dbname="fincorp";
+ include 'connection.php';
+// $servername = "localhost";
+// $username = "root";
+// $password = "password";
+// $dbname="fincorp";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password,$dbname);
@@ -29,7 +30,7 @@ echo"<html><body>
 <br>
 <br>
 <table>
-<form action='http://127.0.0.1/parwalfincorp/record.php' method='post' oninput='intrest_amount.value=(parseInt(a.value)*(parseInt(b.value)/100)/6)'>
+<form action='record.php' method='post' oninput='intrest_amount.value=(parseInt(a.value)*(parseInt(b.value)/100)/6)'>
 
 <td>Loan ID</td>
 <td><input type='varchar' name='rid' size='100'/><br></td>

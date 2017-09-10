@@ -1,9 +1,10 @@
 <?php
 
-	$servername="localhost";
-	$username="root";
-	$password="password";
-	$dbname="fincorp";
+include 'connection.php';
+	// $servername="localhost";
+	// $username="root";
+	// $password="password";
+	// $dbname="fincorp";
 	$counter=1;
 	
 	$date=$_POST['curr_date'];
@@ -95,5 +96,5 @@ else
 		
 	}
 
-	echo(" </table><form method='post' action='http://127.0.0.1/parwalfincorp/display1.php'><input type='date' name='curr_date' value=".$date."></input> <br> <input type='submit' value='Print'/></form><a href='http://127.0.0.1/parwalfincorp/'/> </font><h1>Home");
+	echo(" </table><form method='post' action='display1.php'><input type='date' name='curr_date' value=".$date."></input> <br> <input type='submit' value='Print'/></form><a href=''/> </font><h1>Home");
 	?>

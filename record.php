@@ -1,9 +1,10 @@
 <?php
  include 'header.php';
-$servername = "localhost";
-$username = "root";
-$password = "password";
-$dbname="fincorp";
+ include 'connection.php';
+// $servername = "localhost";
+// $username = "root";
+// $password = "password";
+// $dbname="fincorp";
 $rid = $_POST['rid'];
 $from = $_POST['from'];
 $to = $_POST['to'];
@@ -73,6 +74,6 @@ if (mysqli_query($conn2, $sql2)) {
     echo "Error updating record  saa: " . mysqli_error($conn);
 }
 
-	echo("<a href='http://127.0.0.1/parwalfincorp/'");
+	echo("<a href=''");
 
 ?>

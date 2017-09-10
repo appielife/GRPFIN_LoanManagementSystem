@@ -1,9 +1,10 @@
 <?php
  include 'header.php';
-$servername="localhost";
-	$username="root";
-	$password="password";
-	$dbname="fincorp";
+ include 'connection.php';
+// $servername="localhost";
+// 	$username="root";
+// 	$password="password";
+// 	$dbname="fincorp";
 	$name=$_POST['due_name'];
 	$date=$_POST['curr_date'];
 		$date2=$_POST['curr_date'];
@@ -65,7 +66,7 @@ echo($TEXT);
 
 
 ECHO("<BR> <br><br>
-<form action='http://127.0.0.1/parwalfincorp/sms.php' method='post'>
+<form action='sms.php' method='post'>
 	<input type='hidden' name='due_name' value='$name'>
 	<input type='hidden' name='curr_date' value='$date2'>
 	<input type='submit' value='Send Reminder(SMS)'>

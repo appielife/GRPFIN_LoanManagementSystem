@@ -1,7 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "password";
+ include 'connection.php';
+// $servername = "localhost";
+// $username = "root";
+// $password = "password";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);
@@ -22,7 +23,7 @@ echo"<html><body>
 <br>
 <br>
 <br>
-<form action='http://127.0.0.1/parwalfincorp/enter.php' method='post'>
+<form action='enter.php' method='post'>
 <table>
 <tr>
 <td>UID</td>

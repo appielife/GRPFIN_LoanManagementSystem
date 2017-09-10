@@ -1,8 +1,9 @@
 <?php
  include 'header.php';
-$servername = "localhost";
-$username = "root";
-$password = "password";
+ include 'connection.php';
+// $servername = "localhost";
+// $username = "root";
+// $password = "password";
 $rid = $_POST['rid'];
 $from = $_POST['from'];
 $to = $_POST['to'];
@@ -20,7 +21,7 @@ $int_via =$cheque.$int_via;
 ECHO($due_date);
 
 	
-$dbname="fincorp";
+// $dbname="fincorp";
 
 
 
@@ -76,7 +77,7 @@ if (mysqli_query($conn, $sql3)) {
     echo "Error updating record  saa: " . mysqli_error($conn);
 }
 
-echo"  <form action='http://127.0.0.1/parwalfincorp/display.php' method='post'>
+echo"  <form action='display.php' method='post'>
 
 <input type='date' name='curr_date' value='$due_date'>
 <input type='submit' value='Go to Display Screen'>
@@ -85,5 +86,5 @@ echo"  <form action='http://127.0.0.1/parwalfincorp/display.php' method='post'>
 </body></html>";
 
 
-	echo("<a href='http://127.0.0.1/parwalfincorp/'/> <h1>Home");
+	echo("<a href=''/> <h1>Home");
 ?>

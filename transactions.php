@@ -1,9 +1,10 @@
 <?php
  include 'header.php';
-$servername = "localhost";
-$username = "root";
-$password = "password";
-$dbname="fincorp";
+ include 'connection.php';
+// $servername = "localhost";
+// $username = "root";
+// $password = "password";
+// $dbname="fincorp";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password,$dbname);
@@ -22,7 +23,7 @@ $result2=$conn->query($sql1);
 echo"
 <br>
 
-<form action='http://127.0.0.1/parwalfincorp/record.php' method='post' oninput='intrest_amount.value=(parseFloat(a.value)*(parseFloat(b.value)/10)/60),brokerage_amount.value=(parseFloat(a.value)*(parseFloat(c.value)/10)/60)'>
+<form action='record.php' method='post' oninput='intrest_amount.value=(parseFloat(a.value)*(parseFloat(b.value)/10)/60),brokerage_amount.value=(parseFloat(a.value)*(parseFloat(c.value)/10)/60)'>
 
 <table>
 <td>Loan ID</td>

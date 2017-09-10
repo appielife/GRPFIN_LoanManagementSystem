@@ -1,10 +1,11 @@
 <?php
  include 'header.php';
-$servername = "localhost";
-$username = "root";
-$password = "password";
+ include 'connection.php';
+// $servername = "localhost";
+// $username = "root";
+// $password = "password";
 $var_value = $_POST['varname'];
-$dbname="fincorp";
+// $dbname="fincorp";
 echo($var_value);
 
 
@@ -28,7 +29,7 @@ while($row = $result->fetch_assoc())
 echo"<html><body>
 
 
-<form action='http://127.0.0.1/parwalfincorp/continue1.php' method='post'>
+<form action='continue1.php' method='post'>
 
   RID:<input type='varchar' name='rid' size='100' value=".$row["RID"]."><br> 
   FROM:<input type='varchar' name='from' size='100' value=".$row["TO"]."><br>

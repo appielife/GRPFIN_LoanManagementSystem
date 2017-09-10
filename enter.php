@@ -1,8 +1,9 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "password";
-$dbname="fincorp";
+ include 'connection.php';
+// $servername = "localhost";
+// $username = "root";
+// $password = "password";
+// $dbname="fincorp";
 $uid = $_POST['uid'];
 $name = $_POST['name'];
 $add = $_POST['add'];
@@ -37,7 +38,7 @@ if (mysqli_query($conn,$SQL)) {
 }
 
 
-	echo("<a href='http://127.0.0.1/parwalfincorp/'/> <h1>Home");
+	echo("<a href=''/> <h1>Home");
 
 
 ?>

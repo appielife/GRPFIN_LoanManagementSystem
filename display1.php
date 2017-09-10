@@ -1,9 +1,11 @@
 <?php
 include 'header.php';
-	$servername="localhost";
-	$username="root";
-	$password="password";
-	$dbname="fincorp";
+include 'connection.php';
+	// $servername="localhost";
+	// $username="root";
+	// $password="password";
+	// $dbname="fincorp";
+	// 
 	$counter=1;
 	
 	$date=$_POST['curr_date'];
@@ -82,5 +84,5 @@ else
 		
 	}
 
-	echo(" </table><a href='http://127.0.0.1/parwalfincorp/'/> </font><h1>Home");
+	echo(" </table><a href=''/> </font><h1>Home");
 	?>

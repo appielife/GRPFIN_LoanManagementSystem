@@ -1,8 +1,9 @@
 <?php
  include 'header.php';
-$servername = "localhost";
-$username = "root";
-$password = "password";
+ include 'connection.php';
+// $servername = "localhost";
+// $username = "root";
+// $password = "password";
 $rid = $_POST['rid'];
 $from = $_POST['from'];
 $to = $_POST['to'];
@@ -21,7 +22,7 @@ $random=rand();
 $random1=rand();
 $CLOSED="CLOSED";
 	
-$dbname="fincorp";
+// $dbname="fincorp";
 
 
 
@@ -71,12 +72,12 @@ if (mysqli_query($conn, $sql3)) {
     echo "Error updating record  saa: " . mysqli_error($conn);
 }
 
-echo"  <form action='http://127.0.0.1/parwalfincorp/display.php'>
+echo"  <form action='display.php'>
 <input type='submit' value='Go to Display Screen'>
 </form>
 </body></html>";
 
 
-	echo("<a href='http://127.0.0.1/parwalfincorp/'/> <h1>Home");
+	echo("<a href=''/> <h1>Home");
 
 ?>

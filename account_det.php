@@ -3,10 +3,11 @@
 $total=0;
 $total1=0;
 // include 'header.php';
-	$servername="localhost";
-	$username="root";
-	$password="password";
-	$dbname="fincorp";
+include 'connection.php';
+	// $servername="localhost";
+	// $username="root";
+	// $password="password";
+	// $dbname="fincorp";
 	$name=$_POST['name'];
 	$from=$_POST['from'];
 	$to=$_POST['to'];
@@ -237,7 +238,7 @@ else
 	<table cellspacing='20'>
 	<tr>
 	<td colspan='2'>
-	<form action='http://127.0.0.1/parwalfincorp/dues.php' method='post'>
+	<form action='dues.php' method='post'>
 	<input type='hidden' name='due_name' value='$name'>
 	<input type='date' name='curr_date'>
 	<input type='submit' value='Print dues '>
@@ -246,7 +247,7 @@ else
 	</td>
 	<td colspan='2'>
 	
-	<form action='http://127.0.0.1/parwalfincorp/sms_display.php' method='post'>
+	<form action='sms_display.php' method='post'>
 	<input type='hidden' name='due_name' value='$name'>
 	<input type='date' name='curr_date'>
 	<input type='submit' value='Send Reminder(SMS) '>
@@ -257,7 +258,7 @@ else
 	</table>
 	
 	
-	<a href='http://127.0.0.1/parwalfincorp/'/> <h1>Home");
+	<a href=''/> <h1>Home");
 	
 	?>
 
