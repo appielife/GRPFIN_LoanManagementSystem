@@ -23,6 +23,7 @@ Welcome! <br>
 Select your options
 <table border='0' cellspacing='40'>
 <td><form action='clients.php'><input type='submit'  value='Add Client'/></form></td>
+<td><form action='updateClient.php'><input type='submit'  value='Update Client'/></form></td>
 <td><form action='transactions.php'><input type='submit'  value='Loan Entry'/></form></td>
 <td>
 <table>
