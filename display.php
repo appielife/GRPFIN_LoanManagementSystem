@@ -8,6 +8,7 @@ include 'connection.php';
 	$counter=1;
 	
 	$date=$_POST['curr_date'];
+	
 echo $date;
 
 	
@@ -62,7 +63,7 @@ else
 }
 	$result1=$conn->query($sql1);
 		while($row1 = $result1->fetch_assoc())
-	{
+	{ $name_array[$counter-1]=$row1['TO'];
 		echo ('
 			<tr>
 			<td>'.$counter.'</td>
@@ -96,5 +97,28 @@ else
 		
 	}
 
-	echo(" </table><form method='post' action='display1.php'><input type='date' name='curr_date' value=".$date."></input> <br> <input type='submit' value='Print'/></form><a href=''/> </font><h1>Home");
+	echo(" </table><form method='post' action='display1.php'><input type='date' name='curr_date' value=".$date."></input> <br> <input type='submit' value='Print'/></form>
+
+	<form method='POST' action='AllDues.php'>");
+
+
+	
+	
+		  echo("
+		<input type='hidden' name='result' value=".htmlentities(serialize($name_array))."></input> ");
+
+   
+
+echo("
+
+	
+	
+		  
+		
+		<input type='date' name='curr_date' value=".$date."></input> <br> <input type='submit' value='Print All Dues'/></form>
+	
+	
+	
+	
+	<a href=''/> </font><h1>Home");
 	?>
