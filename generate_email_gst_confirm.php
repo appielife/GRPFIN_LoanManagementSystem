@@ -1,0 +1,201 @@
+<?php
+include 'header.php';
+ini_set( 'max_execution_time', 0 );
+include 'connection.php';
+include 'functions.php';
+$name2 = $_POST[ 'nameArray' ];
+$name1 = array_values( array_unique( $name2 ) );
+$date  = $_POST[ 'curr_date' ];
+$due_3='';
+
+// $name1=["SHARAD_ELECTRONICS"];
+$len   = count( $name1 );
+echo ( '
+   
+   <style type="text/css">
+   .myTable { border-collapse:collapse; }
+   .myTable th { }
+   .myTable td, .myTable th {border-collapse:collapse; padding:5px;border:1px dotted #505050; }
+   </style>
+   <center>
+
+   <table class="myTable">
+   <tr>
+   <th>Date </th>
+   <th>Party Name</th>
+   <th>Amount</th>
+   <th>CGST</th>
+   <th>SGST</th>
+   <th>Round Off</th>
+   <th>Total</th>
+   <th>Remarks </th>
+   <th>View Bill </th>
+
+   </tr>
+   
+   ' );
+
+   
+$due_3='';
+
+
+$conn = new mysqli( $servername, $username, $password, $dbname );
+////header
+if ( $conn->connect_error ) {
+    die( "Connection failed: " . $conn->connect_error );
+}
+for ( $i = 0; $i < $len; $i++ ) {
+    $name            = $name1[ $i ];
+    $count           = 1;
+    $total_brokerage = 0;
+    $sql0            = "SELECT *  FROM `clients_info` WHERE `NAME` LIKE '$name'";
+    $result0         = $conn->query( $sql0 );
+    if ( $result0->num_rows == 0 ) {
+        echo "error";
+    } else
+        $clientData = $result0->fetch_assoc();
+        $client_uid = $clientData[ "UID" ];
+
+   
+        if ( $conn->connect_error ) {
+        die( "Connection failed: " . $conn->connect_error );
+    }
+
+
+    $due_1='<B><font size="4">RAMESH PARWAL</b><BR> </FONT>214-A, City Center, S.C.Road, Jaipur-302001 (P)0141-2374431 (E)parwal.ramesh@yahoo.co.in<br><HR><font size="4"> <B>' . str_replace( '_', ' ', $name ) . '</B></font><br><div style="font-size:14px">C/O SHRI
+    ' . $clientData[ "COMPANY" ] . ',' . $clientData[ "ADDRESS" ] . '. Phone:' . $clientData[ "PHONE" ] . ' PAN: ' . $clientData[ "PAN" ] . ' Email: ' . $clientData[ "EMAIL" ] . ' 
+    </div>
+         <table ><tr><td><div style="font-size:14px">Your A/C have following intrest due(s) as in<B> ' . date( "M,Y", strtotime( $date ) ) . '</B>.
+        <br>Kindly issue cheque(s) in the name of bearer & mention TDS amount deducted(if any) behind . 
+        <br></td></tr>
+        </table>
+        <style type="text/css">
+    .myTable { border-collapse:collapse; }
+    .myTable th { }
+    .myTable td, .myTable th {border-collapse:collapse; padding:5px;border:1px dotted #505050; }
+    </style>
+        <table class="myTable"cellspacing="2"  width="625px" 	 style="font-size:13px  ;">
+        <tr>
+        <th>No. </th>
+        <th>Due Date </th>
+        <th>Bearer Name </th>
+        <th>Amount</th>
+        <th>Intrest</th>
+        <th>Brokerage</th>
+        
+        
+        
+        </tr>
+        ';
+    $sql0    = "SELECT *  FROM `transactions_record` WHERE `TO` LIKE '$name' AND DUE LIKE 'Y' AND DUE_DATE <= '$date' ORDER BY `transactions_record`.`DUE_DATE`  ASC";
+    $result0 = $conn->query( $sql0 );
+    if ( $result0->num_rows == 0 ) {
+        echo "LENDER";
+    } else {
+        while ( $clientTransactions = $result0->fetch_assoc() ) {       
+
+	$due_2='<tr>
+	<td>' . $count . '</td>
+	
+	<td>' . date( "M j, Y", strtotime( $clientTransactions[ "DUE_DATE" ] ) ) . '</td>
+	
+	<td><B>' . str_replace( '_', ' ', $clientTransactions[ "FROM" ] ) . '</B></td>
+	<td>' . $clientTransactions[ "AMOUNT" ] . '/-</td>		
+	<td><B>' . $clientTransactions[ "INTREST_AMT" ] . '/-</B></td>
+	<td>' . $clientTransactions[ "BROKERAGE_AMOUNT" ] . '/-</td>
+	</tr>
+    ';
+        $due_3=$due_3.$due_2;
+        // $total        = $total + $clientTransactions[ "BROKERAGE_AMOUNT" ];
+        // $total1       = $total1 + $clientTransactions[ "AMOUNT" ];
+        // $total2       = $total2 + $clientTransactions[ "INTREST_AMT" ];
+        $brokerage_to = $clientTransactions[ "BROKERAGE_TO" ];
+        $brokerage_to = str_replace( '_', ' ', $brokerage_to );    
+        $count           = $count + 1;
+        $total_brokerage = $total_brokerage + $clientTransactions[ "BROKERAGE_AMOUNT" ];
+        $total_brokerage = number_format( (float) $total_brokerage, 2, '.', '' );
+        $cgst            = number_format( (float) $total_brokerage * 0.09, 2, '.', '' );
+        $sgst            = number_format( (float) $total_brokerage * 0.09, 2, '.', '' );
+        $total_tax       = number_format( (float) $sgst + $cgst, 2, '.', '' );
+        $total_amount    = number_format( (float) $total_brokerage + $cgst + $sgst, 2, '.', '' );
+        $round_off       = number_format( (float) ceil( $total_amount ) - $total_amount, 2, '.', '' );
+        if ( $round_off > 0.50 ) {
+            $round_off = number_format( (float) floor( $total_amount ) - $total_amount, 2, '.', '' );
+        }
+        $total_amount = $total_amount + $round_off;
+        
+        }
+        $due_4= "<tr >
+ 
+        <td colspan='3'<b> <style type='text/css'>
+           input {font-weight:bold; FONT-SIZE:14PX;	}
+        </style>
+                
+                
+                <form>Brokerage:<input value='$brokerage_to'size='40' type='text'/> </b>	</form></td>
+        <td colspan='3' align='right'><b>$total_brokerage/-</b></td>
+        </tr></table>";
+
+        $html_due_final=$due_1.$due_3.$due_4;
+    }
+    // Create connection
+    $conn_gstEntry = new mysqli( $servername, $username, $password, $dbname );
+    // Check connection
+    if ( $conn_gstEntry->connect_error ) {
+        die( "Connection failed: " . $conn->connect_error );
+    }
+    // $date=date('Y-m-d');
+    $prev_date    = date( 'Y-m-d', strtotime( '-1 day', strtotime( $date ) ) );
+    $next_date    = date( 'Y-m-d', strtotime( '+1 day', strtotime( $date ) ) );
+    $sql_gstEntry = "INSERT INTO `fincorp`.`gst_info` (`uid`, `fk_clients_info_uid`, `invoice_date`, `bro_amount`, `cgst`, `sgst`, `round_off`) VALUES (NULL, $client_uid,'$date', $total_brokerage, $cgst, $sgst, $round_off )";
+    if ( $total_brokerage > 0 && mysqli_query( $conn_gstEntry, $sql_gstEntry ) ) {
+
+
+
+
+
+
+        
+        echo ( '   <tr>
+     <td>' . $date . ' </td>
+     <td>' . $name . '</td>
+     <td>' . $total_brokerage . '</td>
+     <td>' . $cgst . '</td>
+     <td>' . $sgst . '</td>
+     <td>' . $round_off . '</td>
+     <td>' . $total_amount . '</td>
+     <td>Success</td>
+     <td> <form action="gst_bill_individual.php" method="post">
+     <input type="hidden" value=' . $prev_date . ' name="from">
+     <input type="hidden" value=' . $next_date . ' name="to">
+     <input type="hidden" value=' . $client_uid . ' name="uid">
+     <button type="submit">View Bill </button>
+
+
+     </form>
+     </td>
+
+     </tr>' );
+    } else {
+        echo ( '   <tr>
+   <td>' . $date . ' </td>
+   <td>' . $name . '</td>
+   <td>' . $total_brokerage . '</td>
+   <td>' . $cgst . '</td>
+   <td>' . $sgst . '</td>
+   <td>' . $round_off . '</td>
+   <td>' . $total_amount . '</td>
+   <td>' . mysqli_error( $conn_gstEntry ) ? mysqli_error( $conn_gstEntry ) : "No Brokerage" . '</td>
+   </tr>' );
+    }
+
+
+}
+
+echo ( '</table>
+<br>
+<br>' );
+
+
+
+include 'footer.php';

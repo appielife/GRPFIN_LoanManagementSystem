@@ -1,6 +1,8 @@
 <?php
+ ob_start();
  include 'connection.php';
  include 'header.php';
+
 // $servername = "localhost";
 // $username = "root";
 // $password = "password";
@@ -15,14 +17,15 @@ if ($conn->connect_error) {
 } 
 
 echo"
-<center>
+<center  style='margin-top: 150;'>
 
 
 <FONT SIZE='6'>
-Welcome! <br>
-Select your options
+ <br>
+
 <table border='0' cellspacing='40'>
 <td><form action='clients.php'><input type='submit'  value='Add Client'/></form></td>
+<td><form action='updateClient.php'><input type='submit'  value='Update Client'/></form></td>
 <td><form action='transactions.php'><input type='submit'  value='Loan Entry'/></form></td>
 <td>
 <table>
@@ -38,7 +41,10 @@ Select your options
 </table>
 </td>
 
+
 <td><form action='account.php'><input type='submit'  value='Account'/></form></td>
+<td><form action='gst.php'><input type='submit'  value='GST Report'/></form></td>
+
 </table>
 
 
@@ -48,7 +54,7 @@ Select your options
 
 
 
-
+include 'footer.php';
 
 
 ?>

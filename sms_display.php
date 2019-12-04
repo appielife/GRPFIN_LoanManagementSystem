@@ -34,7 +34,7 @@ if ($conn1->connect_error)
 	die("Connection failed: ". $conn->connect_error);
 } 
 
-$sql1= "SELECT *  FROM `transactions_record` WHERE `TO` LIKE '$name' AND DUE LIKE 'Y' AND DUE_DATE < '$date' ORDER BY `transactions_record`.`DUE_DATE`  ASC";
+$sql1= "SELECT *  FROM `transactions_record` WHERE `TO` LIKE '$name' AND DUE LIKE 'Y' AND DUE_DATE <= '$date' ORDER BY `transactions_record`.`DUE_DATE`  ASC";
 $result1=$conn1->query($sql1);
 while($row1 = $result1->fetch_assoc())
 {
@@ -75,6 +75,6 @@ ECHO("<BR> <br><br>
 	");
 
  
-
+	include 'footer.php';
 
 ?>

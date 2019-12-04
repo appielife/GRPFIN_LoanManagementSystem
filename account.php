@@ -15,8 +15,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 echo "Connected successfully";
-$sql="SELECT * FROM `clients_info`";
-$sql1="SELECT * FROM `clients_info`";
+$sql="SELECT * FROM `clients_info` ORDER BY `NAME`";
+$sql1="SELECT * FROM `clients_info` ORDER BY `NAME`";
 $result=$conn->query($sql);
 $result1=$conn->query($sql1);
 
@@ -30,7 +30,7 @@ echo"<html><body><center><table><tr><td>
   while($row = $result->fetch_assoc())
   {echo"
 
-  <option value=".$row["NAME"].">".$row["NAME"]."</option>
+  <option value=".$row["NAME"].">".str_replace('_',' ',$row["NAME"])."</option>
 ";
   }
 echo"
@@ -52,4 +52,6 @@ To:</td>
 <input type='submit' value ='Submit'>	</form>
 
 ";
+
+include 'footer.php';
 ?>
